@@ -62,6 +62,7 @@
         console.log({res})
         const { Easting, Northing } = res
         camera.setAttribute('position', { x: Northing + northingOffset, y: 1.6, z: Easting + eastingOffset })
+        console.log(camera.getAttribute('position'))
       }
 
       async function calibrate () {
@@ -71,8 +72,8 @@
         const res = utm.convertLatLngToUtm(latitude, longitude, 10)
         console.log({res})
         const { Easting, Northing } = res
-        eastingOffset =  Easting + 4814985.4542574
-        northingOffset = Northing - 220484.19861012851 
+        eastingOffset =  4814985.4542574 - Easting
+        northingOffset = 220484.19861012851 - Northing
         camera.setAttribute('position', { x: 220484.19861012851, y: 1.6, z: -4814985.4542574 })
         console.log({
           longitude,
