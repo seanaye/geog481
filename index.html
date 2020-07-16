@@ -55,13 +55,15 @@
       }
 
       async function writeCoords() {
-        const { longitude, latitude } = await getPosition()
+        const coords = await getPosition()
+        const { latitude, longitude } = coords
         const { Easting, Northing } = utm.convertLatLngToUtm(latitude, longitude)
         camera.setAttribute('position', { x: Northing + northingOffset, y: 1.6, z: Easting + eastingOffset })
       }
 
       async function calibrate () {
-        const { longitude, latitude } = await getPosition()
+        const coords = await getPosition()
+        const { latitude, longitude } = coords
         const { Easting, Northing } = utm.convertLatLngToUtm(latitude, longitude)
         eastingOffset = -4814796 - Easting 
         northingOffset = 220138 - Northing
