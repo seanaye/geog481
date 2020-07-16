@@ -71,8 +71,8 @@
         const res = utm.convertLatLngToUtm(latitude, longitude, 10)
         console.log({res})
         const { Easting, Northing } = res
-        eastingOffset = -4814796 - Easting 
-        northingOffset = 220138 - Northing
+        eastingOffset = -4814796 - Easting + 500000
+        northingOffset = 220138 - Northing + 4649776.22
         camera.setAttribute('position', { x: 220138, y: 1.6, z: -4814796 })
         console.log({
           longitude,
