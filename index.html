@@ -65,6 +65,15 @@
         const { Easting, Northing } = utm.convertLatLngToUtm(latitude, longitude)
         eastingOffset = -4814796 - Easting 
         northingOffset = 220138 - Northing
+        camera.setAttribute('position', { x: 220138, y: 1.6, z: -4814796 })
+        console.log({
+          longitude,
+          latitude,
+          Easting,
+          Northing,
+          eastingOffset,
+          northingOffset
+        })
       }
 
       document.querySelector('#locate').addEventListener('click', writeCoords)
