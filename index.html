@@ -58,7 +58,9 @@
         const pos = await getPosition()
         console.log(pos)
         const { latitude, longitude } = pos.coords
-        const { Easting, Northing } = utm.convertLatLngToUtm(latitude, longitude)
+        const res = utm.convertLatLngToUtm(latitude, longitude)
+        console.log({res})
+        const { Easting, Northing } = res
         camera.setAttribute('position', { x: Northing + northingOffset, y: 1.6, z: Easting + eastingOffset })
       }
 
@@ -66,7 +68,9 @@
         const pos = await getPosition()
         console.log(pos)
         const { latitude, longitude } = pos.coords
-        const { Easting, Northing } = utm.convertLatLngToUtm(latitude, longitude)
+        const res = utm.convertLatLngToUtm(latitude, longitude)
+        console.log({res})
+        const { Easting, Northing } = res
         eastingOffset = -4814796 - Easting 
         northingOffset = 220138 - Northing
         camera.setAttribute('position', { x: 220138, y: 1.6, z: -4814796 })
