@@ -46,7 +46,7 @@
       let eastingOffset = 0
       let northingOffset = 0
       const camera = document.querySelector('#camera')
-      const utm = new window.UTMLatLng.utmObj()
+      const utm = new window.UTMLatLng()
 
       const getPosition = (options) => {
         return new Promise(function (resolve, reject) {
