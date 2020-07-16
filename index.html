@@ -8,8 +8,11 @@
     <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
     <script src="https://unpkg.com/aframe-extras.ocean@%5E3.5.x/dist/aframe-extras.ocean.min.js"></script>
     <script src="https://unpkg.com/aframe-gradient-sky@1.0.4/dist/gradientsky.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/utm-latlng@1.0.6/UTMLatLng.min.js"></script>
   </head>
   <body>
+    <button id="locate" style="position: fixed; right: 10; top: 10; z-index: 99;">Update Location</button>
+    <button id="calibrate" style="position: fixed; right: 10; top: 30; z-index: 99;">Calibrate Location</button>
     <a-scene background="color: #87CEEB">
       <a-assets>
         <a-asset-item id="campus" src="data/Buildings.gltf"></a-asset-item>
@@ -38,6 +41,36 @@
 
       <a-entity id="light" light="type: ambient; color: #888"></a-entity> -->
     </a-scene>
+    <script>
+      let eastingOffset = 0
+      let northingOffset = 0
+      const camera = document.querySelector('#camera')
+      const utm = new utmObj()
+
+      const getPosition = (options) => {
+        return new Promise(function (resolve, reject) {
+          navigator.geolocation.getCurrentPosition(resolve, reject, options)
+        })
+      }
+
+      async function writeCoords() {
+        const { longitude, latitude } = await getPosition()
+        const { Easting, Northing } = utm.convertLatLngToUtm(latitude, longitude)
+        camera.setAttribute('position', { x: Northing + northingOffset, y: 1.6, z: Easting + eastingOffset })
+      }
+
+      async function calibrate () {
+        const { longitude, latitude } = await getPosition()
+        const { Easting, Northing } = utm.convertLatLngToUtm(latitude, longitude)
+        eastingOffset = -4814796 - Easting 
+        northingOffset = 220138 - Northing
+      }
+
+      document.querySelector('#locate').addEventListener('click', writeCoords)
+      document.querySelector('#calibrate').addEventListener('click', calibrate)
+
+
+    </script>
   </body>
 </html>
 
