@@ -12,7 +12,7 @@
     <script src="latlng.js"></script>
   </head>
   <body>
-    <button id="locate" style="position: fixed; right: 10; top: 10; z-index: 99;">Update Location</button>
+    <button id="locate" style="position: fixed; right: 10; top: 10; z-index: 99;">Start Locating</button>
     <button id="calibrate" style="position: fixed; right: 10; top: 30; z-index: 99;">Calibrate Location</button>
     <a-scene background="color: #87CEEB">
       <a-assets>
@@ -45,6 +45,7 @@
     <script>
       let eastingOffset = 0
       let northingOffset = 0
+      let isUpdating = false
       const camera = document.querySelector('#camera')
       const utm = new window.UTMLatLng()
 
@@ -52,6 +53,11 @@
         return new Promise(function (resolve, reject) {
           navigator.geolocation.getCurrentPosition(resolve, reject, options)
         })
+      }
+
+      async function delay(ms) {
+        // return await for better async stack trace support in case of errors.
+        return await new Promise(resolve => setTimeout(resolve, ms));
       }
 
       async function writeCoords() {
@@ -85,7 +91,22 @@
         })
       }
 
-      document.querySelector('#locate').addEventListener('click', writeCoords)
+      async function loopUpdate () {
+        while (isUpdating) {
+          await writeCoords()
+        }
+      }
+
+      const locateButton = document.querySelector('#locate')
+      locateButton.addEventListener('click', () => {
+        isUpdating = !isUpdating
+        if (isUpdating) {
+          locateButton.innerHTML = 'Stop Locating'
+        } else {
+          locateButton.innerHTML = 'Start Locating'
+        }
+        loopUpdate()
+      })
       document.querySelector('#calibrate').addEventListener('click', calibrate)
 
 
