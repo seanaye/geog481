@@ -45,13 +45,13 @@
     <script>
       let eastingOffset = 0
       let northingOffset = 0
-      let isUpdating = false
+      let watchHandler = null
       const camera = document.querySelector('#camera')
       const utm = new window.UTMLatLng()
 
       const getPosition = (options) => {
         return new Promise(function (resolve, reject) {
-          navigator.geolocation.getCurrentPosition(resolve, reject, options)
+          navigator.geolocation.watchPosition(resolve, reject, options)
         })
       }
 
@@ -60,8 +60,7 @@
         return await new Promise(resolve => setTimeout(resolve, ms));
       }
 
-      async function writeCoords() {
-        const pos = await getPosition()
+      function writeCoords(pos) {
         console.log(pos)
         const { latitude, longitude } = pos.coords
         const res = utm.convertLatLngToUtm(latitude, longitude, 10)
@@ -91,21 +90,16 @@
         })
       }
 
-      async function loopUpdate () {
-        while (isUpdating) {
-          await writeCoords()
-        }
-      }
-
       const locateButton = document.querySelector('#locate')
       locateButton.addEventListener('click', () => {
-        isUpdating = !isUpdating
-        if (isUpdating) {
-          locateButton.innerHTML = 'Stop Locating'
-        } else {
+        if (watchHandler) {
+          navigator.geolocation.clearWatch(watchHandler)
+          watchHandler = null
           locateButton.innerHTML = 'Start Locating'
+        } else {
+          watchHandler = navigator.geolocation.watchPosition(writeCoords, (err) => console.error(err))
+          locateButton.innerHTML = 'Stop Locating'
         }
-        loopUpdate()
       })
       document.querySelector('#calibrate').addEventListener('click', calibrate)
 
