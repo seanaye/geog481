@@ -5,16 +5,16 @@
   <body style="margin : 0px; overflow: hidden;">
     <a-scene embedded arjs>
       <a-assets>
-        <a-asset-item id="campus" src="data/Buildings.gltf"></a-asset-item>
+        <a-asset-item id="campus" src="data/zeroedBuildings.gltf"></a-asset-item>
       </a-assets>
       <a-marker preset="hiro">
         <a-entity
-          position="-220484.19861012851 0 4814985.4542574"
-          scale="0.0001 0.0001 0.0001"
+          position="0 0 0"
+          scale="0.001 0.001 0.001"
           gltf-model="#campus"
         ></a-entity>
       </a-marker>
-      <a-entity camera position="220484.19861012851 0 -4814985.4542574"></a-entity>
+      <a-entity camera position="0 0 0"></a-entity>
     </a-scene>
   </body>
 </html>
