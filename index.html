@@ -53,7 +53,7 @@
 
       const getPosition = (options) => {
         return new Promise(function (resolve, reject) {
-          navigator.geolocation.getPosition(resolve, reject, options)
+          navigator.geolocation.getCurrentPosition(resolve, reject, options)
         })
       }
 
