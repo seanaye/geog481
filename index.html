@@ -19,6 +19,8 @@
     <a-scene background="color: #87CEEB">
       <a-assets>
         <a-asset-item id="campus" src="data/Buildings.gltf"></a-asset-item>
+        <img id="terrainImg" src="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png">
+        <a-asset-item id="terrain" src="data/ENVI/SWOOPDEM.dat"></a-asset-item>
         <!-- <img id="groundTexture" src="https://ichef.bbci.co.uk/news/660/cpsprodpb/12A9B/production/_111434467_gettyimages-1143489763.jpg"> -->
       </a-assets>
       <!-- <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow></a-box>
@@ -43,6 +45,11 @@
       <a-entity id="sky" geometry="primitive: sphere; radius: 5000"
                 material="shader: gradient; topColor: 235 235 245; bottomColor: 185 185 210"
                 scale="-1 1 1"></a-entity>
+      
+      <a-entity
+        position="220484.19861012851 1.6 -4814985.4542574"
+        terrain-model="map: url(https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png); dem: url(data/ENVI/SWOOPDEM.dat); planeWidth: 346; planeHeight: 346; segmentsWidth: 199; segmentsHeight: 199; zPosition: 100"
+      ></a-entity>
 
       <!-- <a-entity id="light" light="type: ambient; color: #888"></a-entity> -->
     </a-scene>
