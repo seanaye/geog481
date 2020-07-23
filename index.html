@@ -99,7 +99,11 @@
           watchHandler = null
           locateButton.innerHTML = 'Start Locating'
         } else {
-          watchHandler = navigator.geolocation.watchPosition(writeCoords, (err) => console.error(err))
+          watchHandler = navigator.geolocation.watchPosition(writeCoords, (err) => console.error(err), {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+          })
           locateButton.innerHTML = 'Stop Locating'
         }
       })
