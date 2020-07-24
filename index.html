@@ -16,7 +16,7 @@
     <button id="locate" style="position: fixed; right: 10; top: 10; z-index: 99;">Start Locating</button>
     <button id="calibrate" style="position: fixed; right: 10; top: 30; z-index: 99;">Calibrate Location</button>
     <button id="ar" style="position: fixed; right: 10; top: 50; z-index: 99;" onclick="location.href='https://watar.xyz/ar';">View AR</button>
-    <a-scene background="color: #87CEEB">
+    <a-scene background="color: #87CEEB" vr-mode-ui="enterVRButton: #enterVRButton;">
       <a-assets>
         <a-asset-item id="campus" src="data/Buildings.gltf"></a-asset-item>
         <!-- <img id="terrainImg" src="data/DEM.tif"> -->
@@ -50,6 +50,8 @@
         position="220484.19861012851 -2 -4814985.4542574"
         terrain-model="wireframe: true; dem: url(data/test.bin); planeWidth: 1385; planeHeight: 1179; z-position: 5;"
       ></a-entity>
+
+      <div id="enterVRButton" class="a-enter-vr-button"></div>
 
       <!-- <a-entity id="light" light="type: ambient; color: #888"></a-entity> -->
     </a-scene>
@@ -118,7 +120,7 @@
       })
       document.querySelector('#calibrate').addEventListener('click', calibrate)
 
-      document.querySelector('button.a-enter-vr-button').addEventListener('click', async () =>{
+      document.querySelector('#enterVRButton').addEventListener('click', async () =>{
         await calibrate()
         watchHandler = navigator.geolocation.watchPosition(writeCoords, (err) => console.error(err), {
             enableHighAccuracy: true,
