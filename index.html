@@ -118,6 +118,15 @@
       })
       document.querySelector('#calibrate').addEventListener('click', calibrate)
 
+      document.querySelector('button.a-enter-vr-button').addEventListener('click', async () =>{
+        await calibrate()
+        watchHandler = navigator.geolocation.watchPosition(writeCoords, (err) => console.error(err), {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        })
+      })
+
 
     </script>
   </body>
