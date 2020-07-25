@@ -1,0 +1,30 @@
+<PAMDataset>
+  <Metadata domain="IMAGE_STRUCTURE">
+    <MDI key="INTERLEAVE">BAND</MDI>
+  </Metadata>
+  <Metadata domain="ENVI">
+    <MDI key="bands">1</MDI>
+    <MDI key="byte_order">0</MDI>
+    <MDI key="data_type">4</MDI>
+    <MDI key="file_type">ENVI Standard</MDI>
+    <MDI key="header_offset">0</MDI>
+    <MDI key="interleave">bsq</MDI>
+    <MDI key="lines">1179</MDI>
+    <MDI key="samples">1385</MDI>
+  </Metadata>
+  <Metadata>
+    <MDI key="AREA_OR_POINT">Area</MDI>
+  </Metadata>
+  <PAMRasterBand band="1">
+    <NoDataValue le_hex_equiv="000000E0FFFFEFC7">-3.40282346638529E+038</NoDataValue>
+    <Metadata>
+      <MDI key="RepresentationType">ATHEMATIC</MDI>
+      <MDI key="STATISTICS_MAXIMUM">65535</MDI>
+      <MDI key="STATISTICS_MEAN">13233.002896494</MDI>
+      <MDI key="STATISTICS_MINIMUM">0</MDI>
+      <MDI key="STATISTICS_SKIPFACTORX">1</MDI>
+      <MDI key="STATISTICS_SKIPFACTORY">1</MDI>
+      <MDI key="STATISTICS_STDDEV">16390.098725695</MDI>
+    </Metadata>
+  </PAMRasterBand>
+</PAMDataset>
