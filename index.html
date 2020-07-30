@@ -5,8 +5,8 @@
     <meta name="description" content="Hello, WebVR! • A-Frame">
     <!-- <script src='https://cdn.jsdelivr.net/npm/webvr-polyfill@latest/build/webvr-polyfill.min.js'></script> -->
     <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@cd01cec35a01e03eb2d6a9272500a53de31d3828/dist/aframe-master.min.js"></script>
-    <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-extras.ocean@%5E3.5.x/dist/aframe-extras.ocean.min.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script> -->
+    <!-- <script src="https://unpkg.com/aframe-extras.ocean@%5E3.5.x/dist/aframe-extras.ocean.min.js"></script> -->
     <script src="https://unpkg.com/aframe-gradient-sky@1.0.4/dist/gradientsky.min.js"></script>
     <script src="https://unpkg.com/aframe-terrain-model-component@1.0.1/dist/aframe-terrain-model-component.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/utm-latlng@1.0.6/UTMLatLng.min.js"></script> -->
@@ -47,12 +47,13 @@
                 scale="-1 1 1"></a-entity>
       
       <a-entity 
-                scale="6 1 6" 
-                position="536478.9013 -350 -4813666.167766" 
-                terrain-model="wireframe: true; 
-                               map: url(data/SWOOPTest.jpg);
-                               dem: url(data/u16BitCompressedTest.bin); planeWidth: 462; planeHeight: 393; 
-                               segmentsWidth: 461; segmentsHeight: 392; zPosition: 500;"></a-entity>
+        scale="6 1 6" 
+        position="536478.9013 -350 -4813666.167766" 
+        terrain-model="wireframe: true; 
+                        map: url(data/SWOOPTest.jpg);
+                        dem: url(data/u16BitCompressedTest.bin); planeWidth: 462; planeHeight: 393; 
+                        segmentsWidth: 461; segmentsHeight: 392; zPosition: 500;"
+      ></a-entity>
 
       <div id="enterVRButton" class="a-enter-vr-button"></div>
 

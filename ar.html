@@ -1,7 +1,10 @@
 <html>
-  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-  <!-- we import arjs version without NFT but with marker + location based support -->
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <!-- we import arjs version without NFT but with marker + location based support -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://unpkg.com/aframe-terrain-model-component@1.0.1/dist/aframe-terrain-model-component.min.js"></script>
+  </head>
   <body style="margin : 0px; overflow: hidden;">
     <a-scene embedded arjs>
       <a-assets>
@@ -13,7 +16,15 @@
           scale="0.005 0.005 0.005"
           gltf-model="#campus"
         ></a-entity>
-        <a-plane color="green" rotation="-90 0 0" width="10" height="10" position="0 0 0"></a-plane>
+        <a-entity
+          scale="0.03 0.005 0.03" 
+          position="0 0 0" 
+          terrain-model="wireframe: true; 
+                          map: url(data/SWOOPTest.jpg);
+                          dem: url(data/u16BitCompressedTest.bin); planeWidth: 462; planeHeight: 393; 
+                          segmentsWidth: 461; segmentsHeight: 392; zPosition: 500;"
+        ></a-entity>
+        <!-- <a-plane color="green" rotation="-90 0 0" width="10" height="10" position="0 0 0"></a-plane> -->
       </a-marker>
       <a-entity camera position="0 0 0"></a-entity>
     </a-scene>
