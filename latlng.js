@@ -1,10 +1,10 @@
 /* global UTMLatLng */
-var method = UTMLatLng.prototype;
+const method = UTMLatLng.prototype;
 
-var datumName = "WGS 84";
-var a;
-var eccSquared;
-var status = false;
+const datumName = "WGS 84";
+const a;
+const eccSquared;
+const status = false;
 function UTMLatLng(datumNameIn) {
     if (datumNameIn !== undefined)
     {
@@ -28,9 +28,9 @@ method.convertLatLngToUtm = function (latitude, longitude,precision)
     latitude = parseFloat(latitude);
     longitude = parseFloat(longitude);
 
-    var LongTemp = longitude;
-    var LatRad = this.toRadians(latitude);
-    var LongRad = this.toRadians(LongTemp);
+    const LongTemp = longitude;
+    const LatRad = this.toRadians(latitude);
+    const LongRad = this.toRadians(LongTemp);
 
     if (LongTemp >= 8 && LongTemp <= 13 && latitude > 54.5 && latitude < 58) {
         ZoneNumber = 32;
@@ -53,28 +53,28 @@ method.convertLatLngToUtm = function (latitude, longitude,precision)
     }
     ZoneNumber = parseInt(ZoneNumber);
 
-    var LongOrigin = (ZoneNumber - 1) * 6 - 180 + 3;  //+3 puts origin in middle of zone
-    var LongOriginRad = this.toRadians(LongOrigin);
+    const LongOrigin = (ZoneNumber - 1) * 6 - 180 + 3;  //+3 puts origin in middle of zone
+    const LongOriginRad = this.toRadians(LongOrigin);
 
-    var UTMZone = this.getUtmLetterDesignator(latitude);
+    const UTMZone = this.getUtmLetterDesignator(latitude);
 
-    var eccPrimeSquared = (this.eccSquared) / (1 - this.eccSquared);
+    const eccPrimeSquared = (this.eccSquared) / (1 - this.eccSquared);
 
-    var N = this.a / Math.sqrt(1 - this.eccSquared * Math.sin(LatRad) * Math.sin(LatRad));
-    var T = Math.tan(LatRad) * Math.tan(LatRad);
-    var C = eccPrimeSquared * Math.cos(LatRad) * Math.cos(LatRad);
-    var A = Math.cos(LatRad) * (LongRad - LongOriginRad);
+    const N = this.a / Math.sqrt(1 - this.eccSquared * Math.sin(LatRad) * Math.sin(LatRad));
+    const T = Math.tan(LatRad) * Math.tan(LatRad);
+    const C = eccPrimeSquared * Math.cos(LatRad) * Math.cos(LatRad);
+    const A = Math.cos(LatRad) * (LongRad - LongOriginRad);
 
-    var M = this.a * ((1 - this.eccSquared / 4 - 3 * this.eccSquared * this.eccSquared / 64 - 5 * this.eccSquared * this.eccSquared * this.eccSquared / 256) * LatRad
+    const M = this.a * ((1 - this.eccSquared / 4 - 3 * this.eccSquared * this.eccSquared / 64 - 5 * this.eccSquared * this.eccSquared * this.eccSquared / 256) * LatRad
         - (3 * this.eccSquared / 8 + 3 * this.eccSquared * this.eccSquared / 32 + 45 * this.eccSquared * this.eccSquared * this.eccSquared / 1024) * Math.sin(2 * LatRad)
         + (15 * this.eccSquared * this.eccSquared / 256 + 45 * this.eccSquared * this.eccSquared * this.eccSquared / 1024) * Math.sin(4 * LatRad)
         - (35 * this.eccSquared * this.eccSquared * this.eccSquared / 3072) * Math.sin(6 * LatRad));
 
-    var UTMEasting = parseFloat(0.9996 * N * (A + (1 - T + C) * A * A * A / 6
+    const UTMEasting = parseFloat(0.9996 * N * (A + (1 - T + C) * A * A * A / 6
         + (5 - 18 * T + T * T + 72 * C - 58 * eccPrimeSquared) * A * A * A * A * A / 120)
     + 500000.0);
 
-    var UTMNorthing = parseFloat(0.9996 * (M + N * Math.tan(LatRad) * (A * A / 2 + (5 - T + 9 * C + 4 * C * C) * A * A * A * A / 24
+    const UTMNorthing = parseFloat(0.9996 * (M + N * Math.tan(LatRad) * (A * A / 2 + (5 - T + 9 * C + 4 * C * C) * A * A * A * A / 24
         + (61 - 58 * T + T * T + 600 * C - 330 * eccPrimeSquared) * A * A * A * A * A * A / 720)));
 
     if (latitude < 0)
@@ -89,12 +89,12 @@ method.convertLatLngToUtm = function (latitude, longitude,precision)
 
 method.convertUtmToLatLng = function (UTMEasting, UTMNorthing, UTMZoneNumber, UTMZoneLetter)
 {
-    var e1 = (1 - Math.sqrt(1 - this.eccSquared)) / (1 + Math.sqrt(1 - this.eccSquared));
-    var x = UTMEasting - 500000.0; //remove 500,000 meter offset for longitude
-    var y = UTMNorthing;
-    var ZoneNumber = UTMZoneNumber;
-    var ZoneLetter = UTMZoneLetter;
-    var NorthernHemisphere;
+    const e1 = (1 - Math.sqrt(1 - this.eccSquared)) / (1 + Math.sqrt(1 - this.eccSquared));
+    const x = UTMEasting - 500000.0; //remove 500,000 meter offset for longitude
+    const y = UTMNorthing;
+    const ZoneNumber = UTMZoneNumber;
+    const ZoneLetter = UTMZoneLetter;
+    const NorthernHemisphere;
     if(UTMEasting===undefined)
     {
         return "Please pass the UTMEasting!";
@@ -119,29 +119,29 @@ method.convertUtmToLatLng = function (UTMEasting, UTMNorthing, UTMZoneNumber, UT
         y -= 10000000.0;
     }
 
-    var LongOrigin = (ZoneNumber - 1) * 6 - 180 + 3;  
+    const LongOrigin = (ZoneNumber - 1) * 6 - 180 + 3;  
 
-    var eccPrimeSquared = (this.eccSquared) / (1 - this.eccSquared);
+    const eccPrimeSquared = (this.eccSquared) / (1 - this.eccSquared);
 
-    var M = y / 0.9996;
-    var mu = M / (this.a * (1 - this.eccSquared / 4 - 3 * this.eccSquared * this.eccSquared / 64 - 5 * this.eccSquared * this.eccSquared * this.eccSquared / 256));
+    const M = y / 0.9996;
+    const mu = M / (this.a * (1 - this.eccSquared / 4 - 3 * this.eccSquared * this.eccSquared / 64 - 5 * this.eccSquared * this.eccSquared * this.eccSquared / 256));
 
-    var phi1Rad = mu + (3 * e1 / 2 - 27 * e1 * e1 * e1 / 32) * Math.sin(2 * mu)
+    const phi1Rad = mu + (3 * e1 / 2 - 27 * e1 * e1 * e1 / 32) * Math.sin(2 * mu)
     + (21 * e1 * e1 / 16 - 55 * e1 * e1 * e1 * e1 / 32) * Math.sin(4 * mu)
     + (151 * e1 * e1 * e1 / 96) * Math.sin(6 * mu);
-    var phi1 = this.toDegrees(phi1Rad);
+    const phi1 = this.toDegrees(phi1Rad);
 
-    var N1 = this.a / Math.sqrt(1 - this.eccSquared * Math.sin(phi1Rad) * Math.sin(phi1Rad));
-    var T1 = Math.tan(phi1Rad) * Math.tan(phi1Rad);
-    var C1 = eccPrimeSquared * Math.cos(phi1Rad) * Math.cos(phi1Rad);
-    var R1 = this.a * (1 - this.eccSquared) / Math.pow(1 - this.eccSquared * Math.sin(phi1Rad) * Math.sin(phi1Rad), 1.5);
-    var D = x / (N1 * 0.9996);
+    const N1 = this.a / Math.sqrt(1 - this.eccSquared * Math.sin(phi1Rad) * Math.sin(phi1Rad));
+    const T1 = Math.tan(phi1Rad) * Math.tan(phi1Rad);
+    const C1 = eccPrimeSquared * Math.cos(phi1Rad) * Math.cos(phi1Rad);
+    const R1 = this.a * (1 - this.eccSquared) / Math.pow(1 - this.eccSquared * Math.sin(phi1Rad) * Math.sin(phi1Rad), 1.5);
+    const D = x / (N1 * 0.9996);
 
-    var Lat = phi1Rad - (N1 * Math.tan(phi1Rad) / R1) * (D * D / 2 - (5 + 3 * T1 + 10 * C1 - 4 * C1 * C1 - 9 * eccPrimeSquared) * D * D * D * D / 24
+    const Lat = phi1Rad - (N1 * Math.tan(phi1Rad) / R1) * (D * D / 2 - (5 + 3 * T1 + 10 * C1 - 4 * C1 * C1 - 9 * eccPrimeSquared) * D * D * D * D / 24
         + (61 + 90 * T1 + 298 * C1 + 45 * T1 * T1 - 252 * eccPrimeSquared - 3 * C1 * C1) * D * D * D * D * D * D / 720);
     Lat = this.toDegrees(Lat);
 
-    var Long = (D - (1 + 2 * T1 + C1) * D * D * D / 6 + (5 - 2 * C1 + 28 * T1 - 3 * C1 * C1 + 8 * eccPrimeSquared + 24 * T1 * T1)
+    const Long = (D - (1 + 2 * T1 + C1) * D * D * D / 6 + (5 - 2 * C1 + 28 * T1 - 3 * C1 * C1 + 8 * eccPrimeSquared + 24 * T1 * T1)
         * D * D * D * D * D / 120) / Math.cos(phi1Rad);
     Long = LongOrigin + this.toDegrees(Long);
     return {lat: Lat, lng: Long};
@@ -315,7 +315,7 @@ method.setEllipsoid = function (name)
 
 
     function precisionRound(number, precision) {
-      var factor = Math.pow(10, precision);
+      const factor = Math.pow(10, precision);
       return Math.round(number * factor) / factor;
   }
   window.UTMLatLng = UTMLatLng;
